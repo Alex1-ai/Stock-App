@@ -1,56 +1,58 @@
 type FiftyTwoWeek {
-      low: Float,
-      high: Float,
-      low_change: Float,
-      high_change: Float,
-      low_change_percent: Float,
-      high_change_percent: Float,
-      range: String
-
-
+  low: Float
+  high: Float
+  low_change: Float
+  high_change: Float
+  low_change_percent: Float
+  high_change_percent: Float
+  range: String
 }
 
-
 type Quote {
-    symbol: String,
-    name: String,
-    exchange: String,
-    mic_code: String,
-    currency: String,
-    datetime: Date,
-    timestamp: Int,
-    open: Float,
-    high: Float,
-    low: Float,
-    close: Float,
-    volume: Date,
-    previous_close: Float,
-    change: Float,
-    percent_change: Float,
-    average_volume: Date,
-    is_market_open: Boolean,
-    fifty_two_week: FiftyTwoWeek
+  symbol: String
+  name: String
+  exchange: String
+  mic_code: String
+  currency: String
+  datetime: Date
+  timestamp: Int
+  open: Float
+  high: Float
+  low: Float
+  close: Float
+  volume: Date
+  previous_close: Float
+  change: Float
+  percent_change: Float
+  average_volume: Date
+  is_market_open: Boolean
+  fifty_two_week: FiftyTwoWeek
+  favorite: [Favorites]
+    @materializer(
+      query:"favoritesByUser_idAndSymbol",
+      arguments: [
+        { name:"symbol", field:"symbol"},
+        { name:"user_id", field:"symbol"},
+      
+      ]
+    )
 }
 
 type Quotes {
-   name: String,
-   value: Quote
-
+  name: String
+  value: Quote
 }
 
 type Query {
-  quote( symbol: String  ): Quote
+  quote(symbol: String): Quote
     @rest(
-    endpoint: "https://api.twelvedata.com/quote",
-    configuration: "twelvedata"
+      endpoint: "https://api.twelvedata.com/quote"
+      configuration: "twelvedata"
     )
-  quotes( symbol: String  ): [Quotes]
+  quotes(symbol: String): [Quotes]
     @rest(
-    endpoint: "https://api.twelvedata.com/quote",
-    configuration: "twelvedata",
-    transforms: [
-       {pathpattern:["<>*"],editor:"objectToArray"}
-    ]
+      endpoint: "https://api.twelvedata.com/quote"
+      configuration: "twelvedata"
+      transforms: [{ pathpattern: ["<>*"], editor: "objectToArray" }]
     )
-    
 }

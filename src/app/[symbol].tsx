@@ -52,7 +52,7 @@ const StockDetails = () => {
 
     } />
     <StockListItem stock={stock} />
-    <Graph />
+    <Graph symbol={stock.symbol}/>
     </View>
   )
 }

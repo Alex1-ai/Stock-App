@@ -45,7 +45,7 @@ export default function TabOneScreen() {
     
      
   return (
-    <View style={styles.container}>
+    <View >
       <Stack.Screen options={{
         title:"Stocks"
       }}/>
@@ -65,12 +65,3 @@ export default function TabOneScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    
-    
-    
-  },
-
-});
