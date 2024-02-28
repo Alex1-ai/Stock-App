@@ -12,6 +12,9 @@ export {
   ErrorBoundary,
 } from 'expo-router';
 
+import { ApolloProvider } from '@apollo/client';
+import client from '../apollo/client';
+
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: '(tabs)',
@@ -49,12 +52,14 @@ function RootLayoutNav() {
 
   return (
     <GestureHandlerRootView style={{flex:1}}>
+    <ApolloProvider client={client}>
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>
+    </ApolloProvider>
     </GestureHandlerRootView>
   );
 }
