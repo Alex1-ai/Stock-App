@@ -3,7 +3,7 @@ import { StyleSheet,FlatList, TouchableOpacity, ActivityIndicator } from 'react-
 // import EditScreenInfo from '@/src/components/EditScreenInfo';
 import { Text, View } from '@/src/components/Themed';
 import { Stack, useRouter } from 'expo-router';
-import  top5  from '@/assets/data/top5.json';
+
 import StockListItem from '@/src/components/StockListItem';
 import Colors from '@/src/constants/Colors';
 import React from 'react';
@@ -32,7 +32,7 @@ export default function TabOneScreen() {
   // console.log(top5)
 
   const { data, loading, error } = useQuery(query,{
-    variables:{ symbol: 'AAPL,IBM,MSFT,META,TSLA,EUR/USD,ETH/BTC:Huobi,NVDA'}
+    variables:{ symbol: 'AAPL,IBM,MSFT,META,TSLA,AMD,TRP:TSX,NVDA'}
   })
   if(loading){
     return <ActivityIndicator />;
